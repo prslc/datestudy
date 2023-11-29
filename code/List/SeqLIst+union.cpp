@@ -106,9 +106,86 @@ void SeqListTest()
 		cout<<data<<"在第"<<SeqListLocate(L,data)<<"个位置"<<endl;
 	}
 }
+void SeqListUnion(SeqList &A,SeqList &B,SeqList &C)
+{
+	int i=1,j=1,k=1;
+	while(i<=A.length && j<=B.length)
+	{
+		if(SeqListGet(A,i)<SeqListGet(B,j))
+		{
+			SeqListInsert(C,k,SeqListGet(A,i));
+			i++;
+			k++;
+		}
+		else if(SeqListGet(A,i)<SeqListGet(B,j))
+		{
+			SeqListInsert(C,k,SeqListGet(B,j));
+			j++;
+			k++;
+		}
+		else
+		{
+			SeqListInsert(C,k,SeqListGet(A,i));
+			i++;
+			j++;
+			k++;
+		}
+	}
+	while(i<=A.length)
+	{
+		SeqListInsert(C,k,SeqListGet(A,i));
+		i++;
+		k++;
+	}
+	while(j<=B.length)
+	{
+		SeqListInsert(C,k,SeqListGet(B,j));
+		j++;
+		k++;
+	}
+}
 
+void SeqListUnionTest()
+{
+	SeqList A,B,C;
+	SeqListInit(A,10);
+	SeqListInit(B,10);
+	SeqListInit(C,10);
+	srand(unsigned(time(NULL)));
+	for(int i=0;i<5;)
+	{
+		int t=rand()%100;
+		int j=1;
+		while(j<=A.length && t>SeqListGet(A,j))
+			j++;
+		if(j==SeqListLength(A)+1 || t!=SeqListGet(A,j))
+		{
+			SeqListInsert(A,j,t);
+			i++;
+		}
+	}
+	cout<<"A:";
+	SeqListPrint(A);
+	for(int i=0;i<8;)
+	{
+		int t=rand()%100;
+		int j=1;
+		while(j<B.length+1 && t>SeqListGet(B,j))
+			j++;
+		if(j==SeqListLength(B)+1 || t!=SeqListGet(B,j))
+		{
+			SeqListInsert(B,j,t);
+			i++;
+		}
+	}
+	cout<<"B:";
+	SeqListPrint(B);
+	SeqListUnion(A,B,C);
+	cout<<"C:";
+	SeqListPrint(C);
+}
 
 int main()
 {
-	SeqListTest();
+	SeqListUnionTest();
 }
