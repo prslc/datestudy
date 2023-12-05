@@ -10,22 +10,29 @@ struct SeqList{
 	int length;
 };
 
+//初始化
 void SeqListInit(SeqList &L,int initsize)
 {
 	L.elem=new elemtype[initsize];
 	L.size=initsize;
 	L.length=0;
 }
+
+//销毁
 void SeqListDestroy(SeqList &L)
 {
 	delete []L.elem;
 	L.size=L.length=0;
 }
+
+//扩容
 void SeqListIncresize(SeqList &L)
 {
 	if(L.size==L.length){
 	L.size++;}
 }
+
+//插入
 void SeqListInsert(SeqList &L,int i,elemtype e)
 {
 	assert(i>=1&& i<=L.length+1);
@@ -36,6 +43,8 @@ void SeqListInsert(SeqList &L,int i,elemtype e)
 	L.elem[i-1]=e;
 	L.length++;
 }
+
+//删除
 void SeqListDelete(SeqList &L,int i)
 {
 	assert(i>=1&& i<=L.length);
@@ -43,6 +52,8 @@ void SeqListDelete(SeqList &L,int i)
 		L.elem[j-1]=L.elem[j];
 	L.length--;
 }
+
+//设置
 void SeqListSet(SeqList &L,int i,elemtype e)
 {
 	assert(i>=1&& i<=L.length);
@@ -55,15 +66,21 @@ int SeqListLocate(SeqList &L,elemtype e)
 			return i+1;
 		return -1;
 }
+
+获取
 elemtype SeqListGet(SeqList &L,int i)
 {
 	assert(i>=1 && i <= L.length);
 	return L.elem[i-1];
 }
+
+//清除
 void SeqListClear(SeqList &L)
 {
 	L.length=0;
 }
+
+//判空
 bool SeqListEmpty(SeqList &L)
 {
 	if(L.length==0)
@@ -71,10 +88,14 @@ bool SeqListEmpty(SeqList &L)
 	else 
 		return false;
 }
+
+//长度
 int SeqListLength(SeqList &L)
 {
 	return L.length;
 }
+
+//打印
 void SeqListPrint(SeqList &L)
 {
 	if(SeqListEmpty(L))
@@ -87,6 +108,7 @@ void SeqListPrint(SeqList &L)
 	cout<<endl;
 }
 
+//测试
 void SeqListTest()
 {
 	cout<<"SeqList Test:"<<endl;
@@ -105,6 +127,12 @@ void SeqListTest()
 		data=rand()%100;
 		cout<<data<<"在第"<<SeqListLocate(L,data)<<"个位置"<<endl;
 	}
+}
+
+
+int main()
+{
+	SeqListTest();
 }
 void SeqListUnion(SeqList &A,SeqList &B,SeqList &C)
 {
@@ -145,6 +173,7 @@ void SeqListUnion(SeqList &A,SeqList &B,SeqList &C)
 	}
 }
 
+//合并测试
 void SeqListUnionTest()
 {
 	SeqList A,B,C;
