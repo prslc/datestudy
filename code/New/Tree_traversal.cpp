@@ -59,7 +59,7 @@ void BitreeBackOrder(Bitree t)
 	}
 }
 
-//获取结点
+//Node count
 int BitreeCount(Bitree t)
 {
 	if(t){
@@ -69,7 +69,7 @@ int BitreeCount(Bitree t)
 	return 0;
 }
 
-//获取高度
+//height
 int BitreeHeight(Bitree t)
 {
 	if(!t)
@@ -79,7 +79,7 @@ int BitreeHeight(Bitree t)
 	return BitreeHeight(t->rc)+1;
 }
 
-//create Bitree
+//Bitree test
 void BitreeTest()
 {
     Bitree t;
@@ -95,11 +95,11 @@ void BitreeTest()
     BitreeInOrder(t);
 
 	cout << "\n";
-	cout << "结点数: ";
+	cout << "Node count: ";
 
 	BitreeCount(t);
 	cout << "\n";
-	cout << "高度: ";
+	cout << "height: ";
 	BitreeHeight(t);
 	cout << "\n";
 	
