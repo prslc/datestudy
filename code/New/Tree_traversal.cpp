@@ -37,8 +37,8 @@ void BitreePreOrder(Bitree t)
 	}
 }
 
-//in
-void BitreeInOrder(Bitree t)
+//CenterOrder
+void BitreeCenterOrderOrder(Bitree t)
 {
 	if(t)
 	{
@@ -59,17 +59,15 @@ void BitreeBackOrder(Bitree t)
 	}
 }
 
-//Node count
+//get node number
 int BitreeCount(Bitree t)
 {
-	if(t){
-		int i = int(BitreeCount(t->lc))+int(BitreeCount(t->rc))+1;
-		printf("%d",i);
-	}
-	return 0;
+	if(t)
+		return BitreeCount(t->lc)+BitreeCount(t->rc)+1;
+		return 0;
 }
 
-//height
+//get height
 int BitreeHeight(Bitree t)
 {
 	if(!t)
@@ -79,7 +77,19 @@ int BitreeHeight(Bitree t)
 	return BitreeHeight(t->rc)+1;
 }
 
-//Bitree test
+//Search
+Bitree BitreeSearch(Bitree t,char e)
+{
+	if(t==0)
+		return 0;
+	if(t->data==e)
+		return t;
+	if(BitreeSearch(t->lc,e))
+		return BitreeSearch(t->lc,e);
+	return BitreeSearch(t->rc,e);
+}
+
+//test
 void BitreeTest()
 {
     Bitree t;
@@ -91,18 +101,17 @@ void BitreeTest()
     cout << "BackOrder: ";
     BitreeBackOrder(t);
 	cout << "\n";
-    cout << "InOrder: ";
-    BitreeInOrder(t);
+    cout << "CenterOrder: ";
+    BitreeCenterOrderOrder(t);
 
 	cout << "\n";
-	cout << "Node count: ";
+	cout << "Node number: ";
+	cout << BitreeCount(t) << "\n";
 
 	BitreeCount(t);
-	cout << "\n";
-	cout << "height: ";
+	cout << "Height: ";
 	BitreeHeight(t);
-	cout << "\n";
-	
+	cout << BitreeHeight(t) << "\n";
 }
 
 int main()
