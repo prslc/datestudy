@@ -61,7 +61,7 @@ void GraphCreate(Graph &g)
 
 void GraphPrint(Graph &g)
 {
-	//增加：使输出的结果带边框和换行，让输出的结果更美观
+	//让输出的结果带边框和换行，让输出的结果更美观
     cout << endl;
     for(int i = 0; i < g.vCount; i++) {
         cout << "|";
