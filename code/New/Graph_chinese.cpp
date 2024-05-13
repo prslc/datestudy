@@ -2,7 +2,6 @@
 #include <assert.h>
 #include <string>
 #include "SeqQueue.h"
-//#include "LinkStack.h"
 using namespace std;
 #define INFINITY 1000000
 struct Graph{
@@ -23,13 +22,14 @@ int GraphLocate(Graph g,string v)
 //create
 void GraphCreate(Graph &g)
 {
-	cout<<"input Graph type:";
+	cout<<"是否为有向图，0.无向图 1.有向图，" << endl;
 	cin>>g.isDirect;
+	cout<<"是否为带权图，0.不带权 1.带权，" << endl;
 	cin>>g.isHaveWeight;
-	cout<<"input vCount:";
+	cout<<"请输入图的顶点数:" << endl;
 	cin>>g.vCount;
 	//create vers
-	cout<<"input vers:";
+	cout<<"请输入图的顶点，例：v1，v2:" << endl;
 	g.vers=new string[g.vCount];
 	for(int i=0;i<g.vCount;i++)
 		cin>>g.vers[i];
@@ -44,10 +44,11 @@ void GraphCreate(Graph &g)
 		else
 			g.matrix[a][b]=0;
 	//add edge
-	cout<<"input eCount:";	cin>>g.eCount;
+	cout<<"请输入图的边数:" << endl;	
+	cin>>g.eCount;
 	string v1,v2;	int weight;
 	for(int q=0;q<g.eCount;q++)	{
-		cout<<"input the edges of "<<q+1<<":";
+		cout<<"请输入边的方向，例v1，换行v2 "<<q+1<<":" << endl;
 		cin>>v1>>v2;
 		if(g.isHaveWeight==1)
 			cin>>weight;
@@ -61,12 +62,26 @@ void GraphCreate(Graph &g)
 
 void GraphPrint(Graph &g)
 {
-	cout << endl; 
+	cout << endl;
+	if (g.isDirect==1)
+	{
+		cout <<"有向图" << endl ; 
+	}else{
+		cout <<"无向图" << endl;
+	}
+	if (g.isHaveWeight==1)
+	{
+		cout <<"带权图" << endl;
+	}else{
+		cout<< "不带权" << endl;
+	}
+	cout << "图的顶点数为：" << g.vCount << endl;
+	cout << "图的边数为：" << g.eCount << endl;
     for(int i = 0; i < g.vCount; i++) {
         for(int j = 0; j < g.vCount; j++) {
             cout << g.matrix[i][j] << " ";
         }
-        cout << endl; 
+        cout << endl;
     }
 }
 
@@ -96,7 +111,7 @@ void GraphDFS(Graph &g,string v)
     {
         is_visited[i]=false;
     }
-    cout<< "DFS: ";
+    cout<< "深度优先搜索: ";
     GraphDFSbyRec(g,v,is_visited);
     cout << endl;
 }
@@ -104,7 +119,7 @@ void GraphDFS(Graph &g,string v)
 //BFS init
 void GraphBFS_init(Graph &g, string v, bool *&is_Visited, SeqQueue &q) {
     is_Visited = new bool[g.vCount];
-	cout << "BFS: ";
+	cout << "广度优先搜索: ";
     for (int i = 0; i < g.vCount; i++) {
         is_Visited[i] = false;
     }
@@ -129,8 +144,6 @@ void GraphBFS(Graph &g, string v, bool *&is_Visited, SeqQueue &q) {
 	cout << endl;
 }
 
-
-
 void GraphCreateTest()
 {
     Graph g;
@@ -146,9 +159,8 @@ void GraphCreateTest()
     delete[] is_visited;
 }
 
-
-
 int main(){
+	 system("chcp 65001");
 	 GraphCreateTest();
 	 system("pause");
 }
