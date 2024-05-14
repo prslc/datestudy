@@ -71,16 +71,16 @@ void GraphPrint(Graph &g)
 }
 
 //DFS init
-void GraphDFSbyRec(Graph &g,string v,bool *&is_visited)
+void GraphDFSbyRec(Graph &g,string v,bool *&isVisited)
 {
     cout<< "" <<v;
-    is_visited[GraphLocate(g,v)] = true;
+    isVisited[GraphLocate(g,v)] = true;
     for (int i = 0; i <g.vCount; i++)
     {
-        if (g.matrix[GraphLocate(g,v)][i]!=0 && is_visited[i]==false)
+        if (g.matrix[GraphLocate(g,v)][i]!=0 && isVisited[i]==false)
         {
 			cout << " -> ";
-            GraphDFSbyRec(g,g.vers[i],is_visited);
+            GraphDFSbyRec(g,g.vers[i],isVisited);
         }
         
     }
@@ -91,37 +91,37 @@ void GraphDFSbyRec(Graph &g,string v,bool *&is_visited)
 //DFS
 void GraphDFS(Graph &g,string v)
 {
-    bool *is_visited = new bool [g.vCount];
+    bool *isVisited = new bool [g.vCount];
     for (int i = 0; i < g.vCount; i++)
     {
-        is_visited[i]=false;
+        isVisited[i]=false;
     }
     cout<< "DFS: ";
-    GraphDFSbyRec(g,v,is_visited);
+    GraphDFSbyRec(g,v,isVisited);
     cout << endl;
 }
 
 //BFS init
-void GraphBFS_init(Graph &g, string v, bool *&is_Visited, SeqQueue &q) {
-    is_Visited = new bool[g.vCount];
+void GraphBFS_init(Graph &g, string v, bool *&isVisited, SeqQueue &q) {
+    isVisited = new bool[g.vCount];
 	cout << "BFS: ";
     for (int i = 0; i < g.vCount; i++) {
-        is_Visited[i] = false;
+        isVisited[i] = false;
     }
     cout << "" << v;
-    is_Visited[GraphLocate(g, v)] = true;
+    isVisited[GraphLocate(g, v)] = true;
     SeqQueueIn(q, GraphLocate(g, v));
 }
 
 //BFS
-void GraphBFS(Graph &g, string v, bool *&is_Visited, SeqQueue &q) {
+void GraphBFS(Graph &g, string v, bool *&isVisited, SeqQueue &q) {
     while (!SeqQueueEmpty(q)) {
         int cur = SeqQueueFront(q);
         SeqQueueOut(q);
         for (int i = 0; i < g.vCount; i++) {
-            if (g.matrix[cur][i] != 0 && !is_Visited[i]) {
+            if (g.matrix[cur][i] != 0 && !isVisited[i]) {
                 cout << " -> " << g.vers[i];
-                is_Visited[i] = true;
+                isVisited[i] = true;
                 SeqQueueIn(q, i);
             }
         }
@@ -137,13 +137,13 @@ void GraphCreateTest()
     GraphCreate(g);
     GraphPrint(g);
     string starting_vertex = g.vers[0];
-    bool *is_visited;
+    bool *isVisited;
 	GraphDFS(g, starting_vertex);
     SeqQueue q;
     SeqQueueInit(q, g.vCount);
-    GraphBFS_init(g, starting_vertex, is_visited, q);
-    GraphBFS(g, starting_vertex, is_visited, q);
-    delete[] is_visited;
+    GraphBFS_init(g, starting_vertex, isVisited, q);
+    GraphBFS(g, starting_vertex, isVisited, q);
+    delete[] isVisited;
 }
 
 
