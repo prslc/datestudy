@@ -67,7 +67,7 @@ int SeqListLocate(SeqList &L,elemtype e)
 		return -1;
 }
 
-获取
+// 获取
 elemtype SeqListGet(SeqList &L,int i)
 {
 	assert(i>=1 && i <= L.length);
